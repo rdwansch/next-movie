@@ -7,13 +7,13 @@ import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(theme => ({
   bannerContainer: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
     width: '100%',
     height: 600,
   },
   typography: {
     color: grey[50],
-    textShadow: `1px 2px 10px black`,
+    textShadow: `1px 1px 2px black`,
     marginBottom: 10,
   },
   caption: {
@@ -30,6 +30,22 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     width: `50%`,
+    [theme.breakpoints.down('sm')]: {
+      '& h2': {
+        fontSize: '30px',
+        fontWeight: 'normal',
+      },
+    },
+    [theme.breakpoints.down('xs')]: {
+      '& h2': {
+        fontSize: '25px',
+        fontWeight: 'normal',
+      },
+      '& p': {
+        fontSize: '14px',
+        fontWeight: 'normal',
+      },
+    },
   },
   button: {
     marginRight: 10,
@@ -44,9 +60,8 @@ const useStyles = makeStyles(theme => ({
   fadeBottom: {
     bottom: 0,
     width: '100%',
-    backgroundImage:
-      'linear-gradient(to top,#111,rgba(14, 0, 0, 0.061)) !important',
-    height: '10%',
+    backgroundImage: 'linear-gradient(to top,#111,rgba(14, 0, 0, 0)) !important',
+    height: '30%',
     position: 'absolute',
   },
 }));
@@ -66,19 +81,11 @@ export default function Banner({ fetchUrl }) {
       // get Random element/ index from array
       // arr[Math.floor(Math.random() * arr.length)]
       setMovie(mv[Math.floor(Math.random() * mv.length)]);
-
-      // let bgbaner = document.querySelector('.__bgbanner');
-      // let ctnbanner = document.querySelector('.__contentBanner');
-      // window.addEventListener('scroll', () => {
-      //   const val = Math.round(window.scrollY);
-      //   bgbaner.style.backgroundPosition = `0 ${val * 0.5}px`;
-      //   ctnbanner.style.top = `${val < 250 ? val / 2 : ''}px`;
-      // });
     } catch (e) {
       console.info(e);
     }
   }, []);
-  // console.log(movie.backdrop_path);
+
   return (
     <div style={{ position: 'relative' }}>
       <div
@@ -87,9 +94,8 @@ export default function Banner({ fetchUrl }) {
           backgroundPosition: '0px 50px',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          objectFit: 'contain',
+          objectfit: 'contain',
           opacity: 0.9,
-          // backgroundAttachment: 'fixed',
         }}
         className={`${css.bannerContainer} __bgbanner`}
       >
@@ -103,11 +109,7 @@ export default function Banner({ fetchUrl }) {
             </Typography>
 
             <div>
-              <Button
-                className={css.button}
-                variant="outlined"
-                onClick={() => router.push(`movie/details/${movie.id}`)}
-              >
+              <Button className={css.button} variant="outlined" onClick={() => router.push(`movie/details/${movie.id}`)}>
                 Details
               </Button>
               <Button className={css.button} variant="outlined">

@@ -1,4 +1,4 @@
-const API_KEY = '02b13b61b0a450734488841d8a9106cd';
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export default {
   getNowPlaying: `/movie/now_playing?api_key=${API_KEY}`,
